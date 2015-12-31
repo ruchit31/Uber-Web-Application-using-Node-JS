@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html">
+  <link href="/stylesheets/style.css" rel="stylesheet">
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src=https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js></script>
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
+<script type="text/javascript">
+
+$(document).ready(function() {
+	  $('[data-toggle=offcanvas]').click(function() {
+	    $('.row-offcanvas').toggleClass('active');
+	  });
+	});
+</script>
+  </head>
+
+<body>
+  <div class="page-container">
+    <!-- top navbar -->
+
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+      <div class="container">
+        <div class="navbar-header" style="color:black">
+          <button type="button" class="navbar-toggle" data-toggle="offcanvas"
+          data-target=".sidebar-nav"></button> <a class="navbar-brand" href="#" style=
+          "padding-left:600px">UBER</a>
+
+          <div style="padding-left:1000px">
+            <div class="dropdown">
+              <button class="btn btn-primary dropdown-toggle" type="button" data-toggle=
+              "dropdown">RUCHIT</button>
+
+              <ul class="dropdown-menu">
+                <li><a href="#">HTML</a></li>
+
+                <li><a href="#">CSS</a></li>
+
+                <li><a href="#">JavaScript</a></li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="container">
+    <div class="row row-offcanvas row-offcanvas-left">
+      <!-- sidebar -->
+
+      <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+        <ul class="nav">
+          <li>
+          <div class="avatarHolder">
+			<span class="helper"></span>
+			<a href="members/older-chauffeur.3436/" class="avatar Av3436m" data-avatarhtml="true"><img src="/data/img.png" width="96" height="96" alt="Older Chauffeur"></a>
+			
+			<!-- slot: message_user_info_avatar -->
+		<!--  </div>
+            <div class="center-block three-quarters push-half--bottom">
+              <div class=
+              "img--circle img--bordered img--shadow fixed-ratio fixed-ratio--1-1">
+              <img src="https://d1w2poirtb3as9.cloudfront.net/default.jpeg" class=
+              "img--full fixed-ratio__content" /></div>
+            </div> -->
+          </li>
+
+          <li class="active"><a href="#">Home</a></li>
+
+          <li><a href="#">Link 1</a></li>
+
+          <li><a href="#">Link 2</a></li>
+
+          <li><a href="#">Link 3</a></li>
+        
+      </div><!-- main area -->
+
+      <div class="col-xs-12 col-sm-9">
+        <table id="trips-table" class=
+        "table table--bordered table--highlighted flush--bottom">
+          <thead>
+            <tr>
+              <th class="text--center"></th>
+
+              <th>Pickup</th>
+
+              <th class="hidden--palm">Driver</th>
+
+              <th class="text--right">Fare</th>
+
+              <th>Car</th>
+
+              <th class="hidden--palm">City</th>
+
+              <th class="hidden--palm">Payment Method</th>
+            </tr>
+          </thead>
+        </table>
+      </div><!-- /.col-xs-12 main -->
+    </div><!--/.row-->
+  </div><!--/.container-->
+  <!--/.page-container-->
+</body>
+</html>

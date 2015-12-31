@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html">
+  <link href="/stylesheets/style.css" rel="stylesheet">
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src=https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js></script>
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="controller.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+  $(".profile").hide();
+  $('.rating-container .star').click(function () {
+      $('.rating-container .star').removeClass('active');
+      $(this).prevAll('.star').addBack().addClass('active');
+  });
+  $('[data-toggle=offcanvas]').click(function() {
+    $('.row-offcanvas').toggleClass('active');
+  });
+  
+ $(".sel1").click(function(){
+     $(".trips").hide();
+     $(".payment").hide();
+     $(".profile").show();
+  });
+ $(".sel").click(function(){
+     $(".profile").hide();
+     $(".payment").hide();
+     $(".trips").show();
+  });
+ $(".sel2").click(function(){
+     $(".trips").hide();
+     $(".profile").hide();
+     $(".payment").show();
+  });
+ 
+});
+
+
+</script>
+
+    
+  <style>
+  #init_map {
+        height: 700px;
+        width:800px;
+        
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height:50%;
+      }
+.controls {
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#origin-input,
+#destination-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 200px;
+}
+
+#origin-input:focus,
+#destination-input:focus {
+  border-color: #4d90fe;
+}
+.star {
+    display: inline-block;    
+    width: 10px;
+    height: 10px;
+    background-color: #CC0;
+    margin: 3px;
+}
+
+  .borderless td, .borderless th {
+    border: none;
+}
+.newd.content {
+    display: none;
+    padding : 5px;
+}
+  </style>
+  </head>
+
+<body ng-app="info" ng-controller="info">
+ 
+    <!-- top navbar -->
+   
+   <br>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    
+        <div class="navbar-header" style="color:black">
+          <button type="button" class="navbar-toggle" data-toggle="offcanvas"
+          data-target=".sidebar-nav"></button> <a class="navbar-brand" href="#" style=
+          "padding-left:600px">UBER</a>
+          <div style="padding-left:1000px">
+            <div class="dropdown">
+             
+             <span class="glyphicon glyphicon-user" style="color:white;padding-top:20px"></span> <span class="dropdown-toggle" data-toggle="dropdown" role="button" style="color:white"><%=username%> <span class="caret"></span></span>
+
+              <ul class="dropdown-menu">
+               <li class="sel"><a ng-click="trips()">My Trips</a></li>
+
+               <li class="sel1"><a href="#profile">Profile</a></li>
+
+               <li class="sel2"><a href="#">Payment</a></li>
+
+                <li class="sel3"><a href="/logout">Log out</a></li>
+                
+                <li class="sel4"><button type="button" ng-click="rideHome()">Request Ride</a></li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+   
+
+  <div class="container">
+      <!-- sidebar -->
+      <div class="row row-offcanvas row-offcanvas-left">
+      
+        
+        <!-- sidebar -->
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+            <div class="avatarHolder">
+          <span class="helper"></span>
+           <a href="members/older-chauffeur.3436/" class="avatar Av3436m" data-avatarhtml="true"><img src="/data/img.png" width="96" height="96" alt="Older Chauffeur"></a>
+           </div>
+            <ul class="nav">
+          <li class="sel"><a ng-click="trips()">My Trips</a></li>
+
+          <li class="sel1"><a ng-click="profile()">Profile</a></li>
+
+          <li class="sel2"><a href="#">Payment</a></li>
+
+          <li class="sel3"><a href="/logout">Log out</a></li>  
+          
+          <li class="sel4"><button type="button" ng-click="rideHome()">Request Ride</button></li>          
+            </ul>
+        </div>
+       
+      <section class="trips" id="trips">
+      
+      <div class="col-xs-12 col-sm-9" id="trips" >
+    <div ng-hide="hide_trips">      
+        <table  class="table table--bordered table--highlighted flush--bottom">
+                  <thead>
+                    <% if(results) { %>
+                    <tr>
+                      <th>Driver</th>
+                      <th>Source</th>
+                      <th>Destination</th>
+                      <th>Fare</th>
+                      <th>DateofTravel</th>
+                      <th>timeoftravel</th>
+                    </tr>
+                  </thead>
+                  <tbody id="items">
+                     <% for(var i=0;i < results.length;i++){%>
+                      <tr>
+                    
+                      <td><%= results[i].d_name%></td>
+                     
+                       
+                      <td><%= results[i].r_source%></td>
+                      <td><%= results[i].r_destination%></td>
+                      <td><%= results[i].b_amount%></td>
+                      <td><%= results[i].dateoftravel%></td>
+                      <td><%= results[i].timeoftravel%></td>
+                       <td>
+                     <a class="btn btn-primary" href="#myModal<%=i%>" data-toggle="modal">view details</a>
+         <div class="modal" id="myModal<%=i%>" tabindex="-1" role="dialog" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h4 class="modal-title" id="label">Details</h4>
+            </div>
+            <div class="modal-body">
+                <iframe width="300" height="200" frameborder="1" scrolling="no" marginheight="0" marginwidth="0" src=" https://maps.google.com/maps?saddr='<%= results[i].r_source%>'+&daddr=+'<%= results[i].r_destination%>'&output=embed">
+           </iframe>
+           <iframe width="200" height="200" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="/data/<%= results[i].rating%>star.png">
+           </iframe>
+            </div>
+            <div class="modal-footer">
+                <a class="btn btn-default" data-dismiss="modal">Close</a>
+            </div>
+        </div>
+    </div>
+</div>
+           
+           
+           
+     
+      
+                    </td>
+                    </tr>
+                    
+                    <%}%>
+                    <% } %>
+                     </tbody>
+        </table> 
+        </div>
+       
+          
+        
+           <div id="init_map" ng-hide="hide_map">
+                      </br>
+                    </br>
+              <input id="origin-input" class="controls" ng-model="source" type="text"
+                placeholder="Enter an origin location">
+            <input id="destination-input" class="controls" ng-model="destination" type="text"
+                placeholder="Enter a destination location">
+                       
+              <div id="map" ></div>
+              </br>
+
+              <div ng-hide="hideButton">
+               <button type="button" ng-click="distance_cal()" class="btn btn-primary">Confirm Ride</button>
+              <button onclick="getLocation() ">My Location</button>
+              </div>
+                    </div>
+
+            <div ng-hide="driver_det">     
+              <table  class="table table--bordered table--highlighted flush--bottom">
+                  <thead>
+                    
+                    <tr>
+                      <th>BillAmount</th>
+                      <th>Surge</th>
+                      <th>Travel Distance</th>
+                      <th>Expected Travel Time</th>
+                    </tr>
+                  </thead>
+                  <tbody id="items">
+                      <tr>   
+                       <td>{{ results1.results.billamount}}</td>
+                       <td>{{ results1.results.surge}}</td>
+                       <td>{{ results1.results.userDistance}}</td>
+                       <td>{{ results1.results.duration}}</td>
+                      </tr>
+                      
+                     </tbody>
+        </table>  
+        
+        <hr>
+              <table  class="table table--bordered table--highlighted flush--bottom">
+                  <thead>
+                    <tr>
+                      
+                      <th>Driver Name</th>
+                      <th>Distance</th>
+                      <th>Expected time</th>
+                     
+                    </tr>
+                  </thead>
+                  <tbody id="items">
+                  
+                    
+                      <tr ng-repeat="j in results1.results.drivers">              
+                        <td>{{ j.name }}</td>
+                        <td>{{j.distance_from_user }}</td>
+                        <td>{{ j.time_gap }}</td>
+                        <td><button type="button" class="btn btn-primary" ng-click="">View Details</button></td>
+                        <td><button type="button" class="btn btn-primary" ng-click="findId(j.id)">Select</button></td>
+                       
+                      </tr>
+                    
+                     </tbody>
+        </table> 
+          </div>
+                
+
+            <div ng-hide="confirmRide">     
+              
+              <table  class="table table--bordered table--highlighted flush--bottom">
+                  <thead>
+                    <tr>
+                      
+                      <th>Driver Name</th>
+                      <th>Distance</th>
+                      <th>Expected time</th>
+                      <th>Car Type</th>
+                      <th>Car Color</th>
+                    </tr>
+                  </thead>
+                  <tbody id="items">
+                    <tr>     
+                       
+                       <td>{{results2.results.dname }}</td>
+                        <td>{{results2.results.distance }}</td>
+                        <td>{{results2.results.expected_time }}</td>
+                        <td>{{ results2.results.car_type }}</td>
+                         <td>{{ results2.results.car_color }}</td>
+                      </tr>
+                  </tbody>
+              </table>
+              <hr>
+              
+              <button type="button" class="btn btn-primary" ng-click="hideCancelRide()">Cancel Ride</button>
+            <form action="updateRide" method="get">
+              <button type="submit" class="btn btn-primary" >Edit Ride</button>
+            </form>
+          </div>
+
+          
+
+          </div>
+        </section>
+        </div>
+        <div class="profile" id="profile" ng-hide="hideprofile">
+     hhjhjh
+      <!-- /.col-xs-12 main -->
+    
+        </div>
+                   
+     <!-- /.col-xs-12 main -->
+      
+     
+      
+    
+  </div><!--/.container-->
+  <!--/.page-container-->
+  
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqJyxzp23GBp2EKWx1OIMGrjCHZOCF-dU&signed_in=true&libraries=places&callback=initMap"
+        async defer></script>
+</body>
+</html>

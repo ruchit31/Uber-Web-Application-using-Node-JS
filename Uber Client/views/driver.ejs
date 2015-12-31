@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html ng-app = "myApp">
+  <head>
+    
+    <link rel='stylesheet' href='/stylesheets/style.css' />
+    
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
+<script src="http://code.jquery.com/ui/1.9.2/jquery-ui.js"></script>
+<link rel='stylesheet' href='/stylesheets/style.css' />
+<link rel='stylesheet' href='/stylesheets/bootstrap.min.css' />
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<meta http-equiv="Cache-Control"
+	content="no-cache, no-store, must-revalidate" />
+<meta http-equiv="Pragma" content="no-cache" />
+<meta http-equiv="Expires" content="0" />
+
+    
+ <title>Uber</title>   
+ 
+<style>
+ 
+
+body
+{ background: linear-gradient(to bottom right, white, #bcbdc4);
+height:4000px;}
+
+.headerx {
+position:fixed;
+width:100%;
+height:45px;
+text-align : centre;
+top:0;
+left:0;
+color:white;
+z-index:7;
+font-family:verdana;
+font-color:black
+-webkit-box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+
+}
+
+
+.header{
+position:fixed;
+width:100%;
+height:85px;
+background:#000000;
+top:0;
+text-align : centre;
+left:0;
+color:black;
+z-index:7;
+font-family:verdana;
+
+}
+
+
+
+
+</style>
+ 
+ </head>
+  <body ng-controller = "AppCtrl">
+    
+   
+     <div class="header">
+      <div class="headerx"> 
+    
+    <h1 align="center">UBER</h1>      
+                      
+    </div>
+ 
+    </div>
+ 
+
+ <div class="col-md-3">
+ <div class="text-center">
+ <br> <br> <br> 
+          <div class="center-block three-quarters push-half--bottom"><div class="img--circle img--bordered img--shadow fixed-ratio fixed-ratio--1-1"><img src="https://d1w2poirtb3as9.cloudfront.net/default.jpeg" class="img--full fixed-ratio__content"></div></div>
+          <h6>Your profile</h6>
+          <div class="progress push-half--top push--bottom"><div style="width:66%" class="progress__bar progress__bar--negative"></div></div>
+          
+          <h6>Add credit card</h6>
+          <h6>Verify Mobile</h6>
+          <h6>Verify Email</h6>
+  	 </div>
+   <ul class="nav vnav navbar-nav">
+   
+   
+   <li><a href="" ng-click="ride_history()"><span class="vertnav">Show Ride History&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a></li>
+   <br><li><a href="" ng-click="show_profile()"><span class="vertnav">Show My Profile&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span></a></li>
+   <br><li><a href=""><span class="vertnav">Show Bill&nbsp;&nbsp;&nbsp;</span></a></li>
+   <li><a href="" ><span class="vertnav">Show Reviews and Ratings</span></a></li>
+   <li><a href=""><span class="vertnav" ng-click= "videoandPictures()">Videos and Pictures</span></a></li>
+   <span class="btn btn-default btn-file">
+  Upload Image <input type="file">
+</span>
+  
+
+</ul>
+</div>    
+
+		
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+<div class="col-md-1">
+</div>  
+	<div class="col-md-5">   
+		  <table class="table table-hover">
+		    <tbody>
+			<tr>			     
+		        <td>Ride Id</td>
+		        <td>Source</td>
+		        <td>Destination</td>
+		        <td>Rider Id</td>
+		        <td>Bill Number</td>
+		      </tr>
+		      <tr ng-repeat ="ride in history">
+		        <td>{{ride.r_id}}</td>
+		        <td>{{ride.r_source}}</td>
+		        <td>{{ride.r_destination}}</td>
+		        <td>{{ride.u_id}}</td>
+		        <td>{{ride.b_id}}</td>
+		      </tr>
+		    </tbody>
+		  </table>
+	</div>
+	<div>
+	   <table class="table table-hover">
+		<tbody>
+		<tr>
+		    <td>First Name:</td>
+		    <td><input type="text" name="firstName" ng-model="profile.d_fname" ></td>
+		</tr>
+		<tr>
+		    <td>Last Name:</td>
+		    <td><input type="text" name="LastName" ng-model="profile.d_lname"></td>
+		</tr>
+		<tr>
+		    <td>SSN:</td>
+		    <td><input type="text" name="SSN" ng-model="profile.ssn"></td>
+		</tr>
+		<tr>
+		    <td>Driver Id:</td>
+		    <td><input type="text" name="DriverId" ng-model="profile.d_id"> </td>
+		</tr>
+		<tr>
+		    <td>Car Number:</td>
+		    <td><input type="text" name="CarNumbe" ng-model="profile.car_number"> </td>
+		</tr>
+		<tr>
+		    <td>Insurance Number:</td>
+		    <td><input type="text" name="InsuranceNumber" ng-model="profile.insurance_number"> </td>
+		</tr>
+		    <td><br><br><button type="button" class="btn btn-primary" ng-click="updateProfile()">Update</button> </td>
+	    
+	     
+	   </tbody>
+	   </table>
+	</div>
+	
+	 <div>
+	   <table class="table table-hover">
+		<tbody>
+		<tr>
+		    <td><b>THANKS FOR RIDING UBER!</b></td>
+		    
+		</tr>
+		<tr>
+		    <td><u><font size="1">BILLED TO</font></u> :</td>
+		</tr>
+		<tr ng-repeat ="ride in bill">
+		        <td>{{ride.u_name}}</td>
+		      </tr>
+		<tr>
+		    <td><u><font size="1">TRIP REQUEST DATE</font></u></td>
+		</tr>
+		
+		
+		<tr ng-repeat ="ride in bill">
+		        <td>{{ride.dateoftravel}}</td>
+		      </tr>
+		
+		
+		
+		<tr>
+		    <td><u><font size="1">PICKUP LOCATION</font></u></td>
+		</tr>
+		<tr ng-repeat ="ride in bill">
+		        <td>{{ride.r_source}}</td>
+		      </tr>
+		<tr>
+		    <td><u><font size="1">DROPOFF LOCATION</font></u></td>
+		</tr>
+		<tr ng-repeat ="ride in bill">
+		        <td>{{ride.r_destination}}</td>
+		      </tr>
+		<tr>
+		    <td><u><font size="1">CREDIT CARD</font></u></td>
+		</tr>
+		    
+		    <td><label>&nbsp;&nbsp;&nbsp;Personal Visa</label></td>
+		</tr>
+		<tr>
+		    <td><u><font size="1">BILLED TO CARD</font></u></td>
+		<tr ng-repeat ="ride in bill">
+		        <td>$ {{ride.b_amount}}</td>
+		      </tr>
+		<tr>
+		    <td><b>FARE BREAKDOWN!</b></td>
+		    <td><b> </b></td>
+		    <td><b>TRIP STATS</b></td>
+		</tr>
+		<tr ng-repeat ="ride in bill">
+		    <td><u><font size="1">CHARGES</font></u></td>
+		    <td> {{ride.b_charges}}</td>
+		    <td><u><font size="1">DISTANCE</font></u></td>
+		    <td> {{ride.b_distance}}</td>
+		</tr>
+		<tr ng-repeat ="ride in bill">
+		    <td><u><font size="1">BASE FARE</font></u></td>
+		    <td>$ {{ride.base_fare}}</td>
+		</tr>
+		<tr ng-repeat ="ride in bill">
+		    <td><u><font size="1">DISTANCE</font></u></td>
+		    <td>$ {{ride.b_distance}}</td>
+		    
+		    <td><u><font size="1">DURATION</font></u></td>
+		    <td>{{ride.b_duration}}</td>
+		</tr>
+		
+		<tr ng-repeat ="ride in bill">
+		    <td><u><font size="1">SURCHARGE AND TAXES</font></u></td>
+		    
+		        <td>$ {{ride.b_amount}}</td>
+		      
+		</tr>
+		
+		<tr ng-repeat ="ride in bill">
+		    <td><u><font size="1">TOTAL FARE</font></u></td>
+		    
+		        <td>$ {{ride.b_amount}}</td>
+		      
+		</tr>
+		
+	   </tbody>
+	   </table>
+	</div>
+		
+	<div ng-show="showVideoandPicture">
+		<a href="{{videoLink.video_link}}" title="test add link">Click to view Your Video</a>
+	</div>	
+		
+<br><br><br><br><br><br><br><br><br><br>
+	
+	
+	</div>
+	
+
+<script src=https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js></script>
+<script src ="/controller/driver_Controller.js"></script> 
+    
+</body>
+</html>

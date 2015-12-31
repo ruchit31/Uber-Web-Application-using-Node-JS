@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html>
+  <head>
+  
+    <meta charset="utf-8">
+  <meta http-equiv="Content-Type" content="text/html">
+  <link href="/stylesheets/style.css" rel="stylesheet">
+  <!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<!-- jQuery library -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<script src=https://ajax.googleapis.com/ajax/libs/angularjs/1.4.6/angular.min.js></script>
+<!-- Latest compiled JavaScript -->
+<script src="http://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+<script src="controller.js"></script>
+<script type="text/javascript">
+
+$(document).ready(function() {
+  $(".profile").hide();
+  
+  $('[data-toggle=offcanvas]').click(function() {
+    $('.row-offcanvas').toggleClass('active');
+  });
+ $(".sel1").click(function(){
+     $(".trips").hide();
+     $(".payment").hide();
+     $(".profile").show();
+  });
+ $(".sel").click(function(){
+     $(".profile").hide();
+     $(".payment").hide();
+     $(".trips").show();
+  });
+ $(".sel2").click(function(){
+     $(".trips").hide();
+     $(".profile").hide();
+     $(".payment").show();
+  });
+});
+
+
+</script>
+    
+  <style>
+  #init_map {
+        height: 700px;
+        width:800px;
+        
+        margin: 0;
+        padding: 0;
+      }
+      #map {
+        height:50%;
+      }
+.controls {
+  margin-top: 10px;
+  border: 1px solid transparent;
+  border-radius: 2px 0 0 2px;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  height: 32px;
+  outline: none;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+#origin-input,
+#destination-input {
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 200px;
+}
+
+#origin-input:focus,
+#destination-input:focus {
+  border-color: #4d90fe;
+}
+  </style>
+  </head>
+
+<body ng-app="info" ng-controller="info">
+ 
+    <!-- top navbar -->
+   
+   <br>
+    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    
+        <div class="navbar-header" style="color:black">
+          <button type="button" class="navbar-toggle" data-toggle="offcanvas"
+          data-target=".sidebar-nav"></button> <a class="navbar-brand" href="#" style=
+          "padding-left:600px">UBER</a>
+
+          <div style="padding-left:900px">
+
+            <div class="dropdown">
+             
+             <span class="glyphicon glyphicon-user" style="color:white;padding-top:20px"></span> <span class="dropdown-toggle" data-toggle="dropdown" role="button" style="color:white">username <span class="caret"></span></span>
+          
+              <ul class="dropdown-menu">
+               <li class="sel"><a ng-click="userDetails()">User Details</a></li>
+
+               <li class="sel"><a ng-click="driverDetails()">Driver Details</a></li>
+                
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+   
+
+  <div class="container">
+      <!-- sidebar -->
+      <div class="row row-offcanvas row-offcanvas-left">
+      
+        
+        <!-- sidebar -->
+        <div class="col-xs-6 col-sm-3 sidebar-offcanvas" id="sidebar" role="navigation">
+            <div ng-hide="user_nav">
+            <ul class="nav">
+          <li class="sel"><a ng-click="showAllUser()">Show Users</a></li>
+
+          <li class="sel1"><a href="#profile">Profile</a></li>
+
+          <li class="sel2"><a href="#">Payment</a></li>
+
+          <li class="sel3"><a href="/logout">Log out</a></li>  
+          
+          <li class="sel4"><button type="button" ng-click="rideHome()">Request Ride</button></li>          
+            </ul>
+            </div>
+
+            <div ng-hide="driver_nav">
+               <ul class="nav">
+          <li class="sel"><a ng-click="trips()">Show Drivers</a></li>
+
+          <li class="sel1"><a href="#profile">Profile</a></li>
+
+          <li class="sel2"><a href="#">Payment</a></li>
+
+          <li class="sel3"><a href="/logout">Log out</a></li>  
+          
+          <li class="sel4"><button type="button" ng-click="rideHome()">Request Ride</button></li>          
+            </ul>
+            </div>
+        </div>
+       
+  
+      
+      <div class="col-xs-12 col-sm-9" id="trips" >
+        <div ng-hide="showUsers">      
+          <table  class="table table--bordered table--highlighted flush--bottom">
+                  <thead>
+                    
+                    <tr>
+                      
+                      <th>SSN</th>
+                      <th>First name</th>
+                      <th>Last Name</th>
+                      <th>Email</th>
+                      
+                    </tr>
+                  </thead>
+                  
+                  <tbody id="items" ng-repeat="i in results1">
+                     
+                      <tr>
+                      <td>{{ i.ssn}}</td>
+                      <td>{{ i.fname }}</td>
+                      <td>{{ i.lname }}</td>
+                      <td>{{ i.email }}</td>
+                      
+                      <td><button type="button" ng-click="deleteUser(i.uid)" class="btn btn-primary">Delete User</button></td>
+                      
+                    </tr>
+                     </tbody>
+            </table> 
+          </div>
+
+        </div>
+        
+        </div>
+        </div>
+    <script type="text/javascript">
+var info = angular.module('info', []);
+
+
+info.controller('info', function($scope, $http) {
+  //window.alert("hi there inside");
+  $scope.user_nav = true;
+  $scope.driver_nav = true;
+  $scope.showUsers = true;
+  
+ // alert("in controller");
+  
+  $scope.userDetails = function() {
+    // alert("in hideCancelRide");
+    $scope.user_nav = false;
+    $scope.driver_nav = true;
+      };   
+  
+
+  $scope.driverDetails = function() {
+    $scope.driver_nav = false;
+    $scope.user_nav = true;
+    $scope.showUsers=true;
+  };
+  
+  $scope.showAllUser = function() {
+    // alert("in controller");
+    $scope.user_nav = false;
+    $scope.driver_nav = true;
+    $scope.showUsers = false;
+
+    $http({
+      method : "get",
+      url : '/showAllUser',
+      data : {
+             
+      }   
+    }).success(function(response) {
+      $scope.results1 = response.results.userDetail;
+      $scope.showAllUser = false;
+      //alert(response[0].userDistance);
+      //window.location.assign('/afterRideRequestPage');
+      console.log($scope.results1);
+  }).error(function(error) {
+ 
+  window.alert("errororroror in distance_cal");
+
+  });
+    
+    };
+
+    $scope.deleteUser = function(uid) {
+    // alert("in controller");
+    $scope.user_nav = false;
+    $scope.driver_nav = true;
+    $scope.showUsers = true;
+
+    $http({
+      method : "post",
+      url : '/deleteUser',
+      data : {
+            "uid" : uid 
+      }   
+    }).success(function(response) {
+      
+      //alert(response[0].userDistance);
+      window.location.assign('/userlogin1_admin');
+      
+  }).error(function(error) {
+ 
+  window.alert("errororroror in distance_cal");
+
+  });
+    
+    };
+  
+});
+    </script>
+  
+    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDqJyxzp23GBp2EKWx1OIMGrjCHZOCF-dU&signed_in=true&libraries=places&callback=initMap"
+        async defer></script>
+</body>
+</html>

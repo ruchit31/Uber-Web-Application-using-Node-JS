@@ -1,0 +1,455 @@
+body {
+  padding: 50px;
+  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+}
+
+a {
+  color: #00B7FF;
+}
+.text-center {
+  padding-top: 20px;
+}
+.col-xs-12 {
+  background-color: #fff;
+}
+#sidebar {
+  height: 100%;
+  padding-right: 0;
+  padding-top: 20px;
+}
+#sidebar .nav {
+  width: 95%;
+}
+#sidebar li {
+  border:0 #f2f2f2 solid;
+  border-bottom-width:1px;
+}
+
+/* collapsed sidebar styles */
+@media screen and (max-width: 767px) {
+  .row-offcanvas {
+    position: relative;
+    -webkit-transition: all 0.25s ease-out;
+    -moz-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+  }
+  .row-offcanvas-right
+  .sidebar-offcanvas {
+    right: -41.6%;
+  }
+
+  .row-offcanvas-left
+  .sidebar-offcanvas {
+    left: -41.6%;
+  }
+  .row-offcanvas-right.active {
+    right: 41.6%;
+  }
+  .row-offcanvas-left.active {
+    left: 41.6%;
+  }
+  .sidebar-offcanvas {
+    position: absolute;
+    top: 0;
+    width: 41.6%;
+  }
+  #sidebar {
+    padding-top:0;
+  }
+}
+
+//------------------------------------------------
+
+@import url(http://fonts.googleapis.com/css?family=Open+Sans:400,700,600);
+
+html,
+body {
+  height: 100%;
+  /* The html and body elements cannot have any padding or margin. */
+  -webkit-font-smoothing: antialiased;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.row {
+  margin-left:0px;
+  margin-right:0px;
+}
+
+/* Wrapper for page content to push down footer */
+#wrap {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  /* Negative indent footer by its height */
+  margin: 0 auto -60px;
+  /* Pad bottom by footer height */
+  padding: 0 0 60px;
+}
+
+/* Set the fixed height of the footer here */
+#footer {
+  height: 60px;
+  background-color: #f5f5f5;
+  margin-top:50px;
+  padding-top:20px;
+  padding-bottom:20px;
+}
+
+
+/* Custom page CSS
+-------------------------------------------------- */
+/* CUSTOMIZE THE NAVBAR
+-------------------------------------------------- */
+
+/* Special class on .container surrounding .navbar, used for positioning it into place. */
+.navbar-wrapper {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 10;
+}
+
+
+/* Since positioning the image, we need to help out the caption */
+.carousel-caption {
+  z-index: 10;
+}
+
+/* Declare heights because of positioning of img element */
+#myCarousel  .item {
+  height: 600px;
+  background-color:#bbb;
+}
+#myCarousel img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 100%;
+  height: 600px;
+}
+
+
+#wrap > .container {
+  padding: 60px 15px 0;
+}
+.container .credit {
+  margin: 20px 0;
+}
+
+#footer {
+  background-color:#414141;
+}
+
+#footer a {
+  color:#efefef;
+}
+
+header {
+  background: #333;
+  color:#555;
+}
+
+header .dropdown-menu {
+  top:74px;
+  background: #ffcc33;
+  border-width:0;
+}
+
+h1 {
+  font-size:50px;
+}
+
+.logo {
+  font-size:40px;
+  position:absolute;
+  z-index:1200;
+  color:white;
+  top:190px;
+  margin-left: 120px;
+  text-align:left;
+  width:100%;
+}
+
+#nav {
+  width: 100%;
+  position:static;
+  top:-32px;
+  background-color: black;
+}
+
+#nav.affix {
+   position: fixed;
+   top: 0;
+   z-index:10;
+   -webkit-transition: all .6s ease-in-out;
+}
+
+#footer > .container {
+  
+}
+
+.BackImg{
+  background: "http://www.designbolts.com/wp-content/uploads/2012/12/Noisy-Grid-Seamless-Pattern-For-Website-Background.jpg";
+}
+
+@media (min-width: 767px) {
+  .navbar-nav.nav-justified > li{
+      float:none;
+  }
+}
+  
+.navbar-nav {
+  margin: 1px 1px; 
+}  
+  
+/* customize nav style */
+.navbar-custom {
+    background-color: #2e2e2e;
+	font-weight:700;
+    text-transform:uppercase;
+    border-width:0;
+}
+.navbar-custom  .navbar-nav>li>a {
+	color: #ddd;
+}
+.navbar-custom  .dropdown-menu li>a:hover {
+	color: #eee;
+}
+.navbar-custom  .navbar-nav li>a:hover, .navbar-nav li .open, .navbar-custom .navbar-nav .active a  {
+	background-color: #000;
+}
+.navbar-custom .navbar-nav>.dropdown>a .caret {
+	border-top-color: #999;
+	border-bottom-color: #999;
+}
+
+.navbar-collapse.in { /*3.0.2 bug workaround*/
+    overflow-y: visible;
+}
+
+.navbar-toggle {
+	outline:0;
+}
+
+.divider {
+	height:50px;
+}
+
+.panel {
+	border-width:0;
+}
+
+@media (max-width: 768px) {
+	header {
+	
+	}
+}
+
+#map-canvas {
+  	width: 100%; 
+  	height: 300px;
+	margin: 0;
+	padding: 15px;
+}
+
+.scroll-top {
+   position:fixed;
+   bottom:0;
+   right:6%;
+   z-index:100;
+   background: #f2f3f2;
+   font-size:24px;
+   border-top-left-radius:3px;
+   border-top-right-radius:3px;
+}
+.scroll-top a:link,.scroll-top a:visited {
+  color:#222;
+} 
+ 
+
+section {
+  color: #ffffff;
+  min-height: 400px;
+  height: auto !important;
+  height: 100%;
+  padding-top:100px;
+}
+
+.bg-1 {
+	background: url('http://www.bootply.com/assets/example/bg_suburb.jpg') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+}
+
+.bg-2 {
+	background: url('http://www.bootply.com/assets/example/bg_suburb.jpg') no-repeat center center fixed; 
+    -webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;
+}
+
+.bg-3 {
+	background: url('http://beingpeterkim.typepad.com/.a/6a00d8341c04e353ef01a73d9453dc970d-800wi') no-repeat center center ; 
+  /*background: url('css/uberx1.png') no-repeat center center ; */
+    /*-webkit-background-size: cover;
+  	-moz-background-size: cover;
+  	-o-background-size: cover;
+  	background-size: cover;*/
+/*    height: 720;
+    width: 100%*/
+  }
+
+.bg-4 {
+	padding-top:30px;
+    background-color:#e6e6e6;
+}
+
+.panel .img-responsive {
+	min-height:250px;
+    max-height:20px;
+}
+
+/*-------------------*/
+
+.vehicle-fleet .vehicle-chooser {
+    width: 435px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 9;
+    font-size: 0;
+}
+.yui3-u-1 {
+    display: block;
+}
+.yui3-u-1, .yui3-u-1-2, .yui3-u-1-3, .yui3-u-2-3, .yui3-u-1-4, .yui3-u-3-4, .yui3-u-1-5, .yui3-u-2-5, .yui3-u-3-5, .yui3-u-4-5, .yui3-u-1-6, .yui3-u-5-6, .yui3-u-1-8, .yui3-u-3-8, .yui3-u-5-8, .yui3-u-7-8, .yui3-u-1-12, .yui3-u-5-12, .yui3-u-7-12, .yui3-u-11-12, .yui3-u-1-24, .yui3-u-5-24, .yui3-u-7-24, .yui3-u-11-24, .yui3-u-13-24, .yui3-u-17-24, .yui3-u-19-24, .yui3-u-23-24 {
+    display: inline-block;
+    zoom: 1;
+    letter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: top;
+    text-rendering: auto;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+    display: block;
+}
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+user agent stylesheetarticle, aside, footer, header, hgroup, main, nav, section {
+    display: block;
+}
+Inherited from section.vehicle-fleet.yui3-g
+.vehicle-fleet {
+    height: 1026px;
+    padding: 60px 0;
+    position: relative;
+    text-align: center;
+    background: #fff url(https://d1a3f4spazzrp4.cloudfront.net/web-fresh/pattern-grid@1x.jpg) repeat left top;
+    background-size: 18px 18px;
+}
+.yui3-g {
+    letter-spacing: -.31em;
+    text-rendering: optimizespeed;
+}
+Inherited from body.dark.light-foot
+body {
+    font-size: 1em;
+    line-height: 1.4;
+}
+Inherited from html.js.flexbox.canvas.canvastext.webgl.no-touch.geolocation.postmessage.websqldatabase.indexeddb.hashchange.history.draganddrop.websockets.rgba.hsla.multiplebgs.backgroundsize.borderimage.borderradius.boxshadow.textshadow.opacity.cssanimations.csscolumns.cssgradients.cssreflections.csstransforms.csstransforms3d.csstransitions.fontface.generatedcontent.video.audio.localstorage.sessionstorage.webworkers.applicationcache.svg.inlinesvg.smil.svgclippaths
+html, button, input, select, textarea {
+    color: #222;
+}
+html, button, input, select, textarea {
+    font-family: sans-serif;
+}
+html {
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+Pseudo ::selection element
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+
+/*-------------------*/
+element.style {
+    right: 0px;
+}
+.light-foot .global-footer {
+    background-color: #fff;
+}
+.global-footer {
+    height: 145px;
+    padding-top: 12px;
+    position: relative;
+    background-color: #070716;
+}
+.yui3-g {
+    letter-spacing: -.31em;
+    text-rendering: optimizespeed;
+}
+article, aside, details, figcaption, figure, footer, header, hgroup, main, nav, section, summary {
+    display: block;
+}
+* {
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+user agent stylesheetarticle, aside, footer, header, hgroup, main, nav, section {
+    display: block;
+}
+Inherited from body.dark.light-foot
+body {
+    font-size: 1em;
+    line-height: 1.4;
+}
+Inherited from html.js.flexbox.canvas.canvastext.webgl.no-touch.geolocation.postmessage.websqldatabase.indexeddb.hashchange.history.draganddrop.websockets.rgba.hsla.multiplebgs.backgroundsize.borderimage.borderradius.boxshadow.textshadow.opacity.cssanimations.csscolumns.cssgradients.cssreflections.csstransforms.csstransforms3d.csstransitions.fontface.generatedcontent.video.audio.localstorage.sessionstorage.webworkers.applicationcache.svg.inlinesvg.smil.svgclippaths
+html, button, input, select, textarea {
+    color: #222;
+}
+html, button, input, select, textarea {
+    font-family: sans-serif;
+}
+html {
+    font-size: 100%;
+    -webkit-text-size-adjust: 100%;
+    -ms-text-size-adjust: 100%;
+}
+Pseudo ::selection element
+::selection {
+    background: #b3d4fc;
+    text-shadow: none;
+}
+position‒
+‒margin‒
+‒border‒
+‒padding12
+‒1280 × 133‒
+‒‒
+‒‒
+‒0
+‒
+Console
+Emulation
+Rendering
+
+
+
+
+Preserve log
+.
+https://c126756.conv.btrll.com/v1/cpix/-/-/-/-/-/cpid.126756 Failed to load resource: net::ERR_BLOCKED_BY_CLIENT
+.
+
+
+//------------------------------------------------
